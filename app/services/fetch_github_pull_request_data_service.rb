@@ -17,7 +17,7 @@ class FetchGithubPullRequestDataService
     commits_data = fetch_commits_data(pr_data[:commits_url])
     comments_data = fetch_comments_data(pr_data[:review_comments_url])
 
-    assemble_pull_request_data(pr_data, diff_data, commits_data, comments_data)
+    PullRequest.create(assemble_pull_request_data(pr_data, diff_data, commits_data, comments_data))
   end
 
   private
@@ -90,8 +90,8 @@ class FetchGithubPullRequestDataService
       comments: comments_data,
       commits: commits_data,
       diff: diff_data,
-      created_at: pr_data[:created_at],
-      updated_at: pr_data[:updated_at]
+      pr_created_at: pr_data[:created_at],
+      pr_updated_at: pr_data[:updated_at]
     }
   end
 end
