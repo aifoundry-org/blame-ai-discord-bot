@@ -120,7 +120,7 @@ RSpec.describe FetchGithubPullRequestDataService do
         }
 
         expect(PullRequest).to receive(:create).with(expected_data)
-        service.call
+        expect(service.call[:status]).to eq(:ok)
       end
     end
 
@@ -128,12 +128,12 @@ RSpec.describe FetchGithubPullRequestDataService do
       before do
         allow(client).to receive(:send_get_request)
           .with(pull_request_api_url)
-          .and_return(instance_double(RestClient::Response, code: 404, body: "{}"))
+          .and_return(instance_double(RestClient::Response, code: 404, body: { message: "Not found" }.to_json))
       end
 
       it "does not create a PullRequest" do
         expect(PullRequest).not_to receive(:create)
-        service.call
+        expect(service.call).to eq({ status: :failed, message: "Not found" })
       end
     end
   end

@@ -11,13 +11,13 @@ class FetchGithubPullRequestDataService
     data = parse_pull_request_url
     pr_data = fetch_pull_request_data(data)
 
-    return unless pr_data
-
     diff_data = fetch_diff_data(pr_data[:diff_url])
     commits_data = fetch_commits_data(pr_data[:commits_url])
     comments_data = fetch_comments_data(pr_data[:review_comments_url])
 
-    PullRequest.create(assemble_pull_request_data(pr_data, diff_data, commits_data, comments_data))
+    { status: :ok, pull_request: PullRequest.create(assemble_pull_request_data(pr_data, diff_data, commits_data, comments_data)) }
+  rescue StandardError => e
+    { status: :failed, message: e.message }
   end
 
   private
@@ -26,6 +26,7 @@ class FetchGithubPullRequestDataService
     pattern = %r{\Ahttps://github\.com/(?<owner>[^/]+)/(?<repo>[^/]+)/pull/(?<pr_number>\d+)\z}
 
     match_data = pull_request_url.match(pattern)
+
     raise ArgumentError, "Invalid GitHub pull request URL" unless match_data
 
     {
@@ -37,7 +38,8 @@ class FetchGithubPullRequestDataService
 
   def fetch_pull_request_data(data)
     response = client.send_get_request("#{GITHUB_BASE_URL}/repos/#{data[:owner]}/#{data[:repo_name]}/pulls/#{data[:pull_request_number]}")
-    return nil unless response.code == 200
+
+    raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 
     JSON.parse(response.body).deep_symbolize_keys
   end
@@ -49,7 +51,8 @@ class FetchGithubPullRequestDataService
 
   def fetch_commits_data(commits_url)
     response = client.send_get_request(commits_url)
-    return [] unless response.code == 200
+
+    raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 
     JSON.parse(response.body).map do |commit|
       {
@@ -63,7 +66,8 @@ class FetchGithubPullRequestDataService
 
   def fetch_comments_data(comments_url)
     response = client.send_get_request(comments_url)
-    return [] unless response.code == 200
+
+    raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 
     JSON.parse(response.body).map do |comment|
       {
