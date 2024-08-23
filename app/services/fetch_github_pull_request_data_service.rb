@@ -1,6 +1,6 @@
 class FetchGithubPullRequestDataService
   attr_reader :pull_request_url, :client
-  GITHUB_BASE_URL = 'https://api.github.com'
+  GITHUB_BASE_URL = "https://api.github.com"
 
   def initialize(pull_request_url)
     @pull_request_url = pull_request_url
@@ -26,7 +26,7 @@ class FetchGithubPullRequestDataService
     pattern = %r{\Ahttps://github\.com/(?<owner>[^/]+)/(?<repo>[^/]+)/pull/(?<pr_number>\d+)\z}
 
     match_data = pull_request_url.match(pattern)
-    raise ArgumentError, 'Invalid GitHub pull request URL' unless match_data
+    raise ArgumentError, "Invalid GitHub pull request URL" unless match_data
 
     {
       owner: match_data[:owner],
@@ -44,7 +44,7 @@ class FetchGithubPullRequestDataService
 
   def fetch_diff_data(diff_url)
     response = client.send_get_request(diff_url)
-    response.code == 200 ? response.body : ''
+    response.code == 200 ? response.body : ""
   end
 
   def fetch_commits_data(commits_url)
@@ -53,10 +53,10 @@ class FetchGithubPullRequestDataService
 
     JSON.parse(response.body).map do |commit|
       {
-        sha: commit['sha'],
-        author: commit['commit']['author'].slice('name', 'email'),
-        message: commit['commit']['message'],
-        date: commit['commit']['author']['date']
+        sha: commit["sha"],
+        author: commit["commit"]["author"].slice("name", "email"),
+        message: commit["commit"]["message"],
+        date: commit["commit"]["author"]["date"]
       }
     end
   end
@@ -67,14 +67,14 @@ class FetchGithubPullRequestDataService
 
     JSON.parse(response.body).map do |comment|
       {
-        body: comment['body'],
-        id: comment['id'],
-        diff_hunk: comment['diff_hunk'],
-        path: comment['path'],
-        user: comment['user']['login'],
-        created_at: comment['created_at'],
-        updated_at: comment['updated_at'],
-        reactions: comment['reactions'].except('url')
+        body: comment["body"],
+        id: comment["id"],
+        diff_hunk: comment["diff_hunk"],
+        path: comment["path"],
+        user: comment["user"]["login"],
+        created_at: comment["created_at"],
+        updated_at: comment["updated_at"],
+        reactions: comment["reactions"].except("url")
       }
     end
   end
