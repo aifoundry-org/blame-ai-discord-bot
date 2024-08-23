@@ -44,5 +44,3 @@ end
 gem "rest-client", "~> 2.1"
 
 gem "dotenv", "~> 3.1"
-
-gem "pry", "~> 0.14.2"
