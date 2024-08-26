@@ -40,3 +40,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.1.0"
 end
+
+gem "rest-client", "~> 2.1"
+
+gem "dotenv", "~> 3.1"
