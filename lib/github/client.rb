@@ -25,11 +25,14 @@ module Github
     end
 
     def headers
-      @_headers ||= {
-        "X-GitHub-Api-Version" => "2022-11-28",
-        "Authorization" => "Bearer #{ENV['GITHUB_API_TOKEN']}",
-        "Accept" => "application/vnd.github+json"
-      }
+      @_headers ||= default_headers.tap do |headers|
+        headers["Authorization"] = "Bearer #{ENV['GITHUB_API_TOKEN']}" if ENV["GITHUB_API_TOKEN"]
+      end
+    end
+
+    def default_headers
+      { "X-GitHub-Api-Version" => "2022-11-28",
+        "Accept" => "application/vnd.github+json" }
     end
   end
 end

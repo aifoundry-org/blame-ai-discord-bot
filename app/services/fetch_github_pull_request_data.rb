@@ -19,8 +19,6 @@ class FetchGithubPullRequestData
     { status: :failed, message: e.message }
   end
 
-  private
-
   def parse_pull_request_url
     pattern = %r{\Ahttps://github\.com/(?<owner>[^/]+)/(?<repo>[^/]+)/pull/(?<pr_number>\d+)\z}
 
