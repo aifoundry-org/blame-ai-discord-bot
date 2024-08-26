@@ -1,6 +1,5 @@
 class FetchGithubPullRequestDataService
   attr_reader :pull_request_url, :client
-  GITHUB_BASE_URL = "https://api.github.com"
 
   def initialize(pull_request_url)
     @pull_request_url = pull_request_url
@@ -37,7 +36,7 @@ class FetchGithubPullRequestDataService
   end
 
   def fetch_pull_request_data(data)
-    response = client.send_get_request("#{GITHUB_BASE_URL}/repos/#{data[:owner]}/#{data[:repo_name]}/pulls/#{data[:pull_request_number]}")
+    response = client.send_get_request("/repos/#{data[:owner]}/#{data[:repo_name]}/pulls/#{data[:pull_request_number]}")
 
     raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 
@@ -45,12 +44,12 @@ class FetchGithubPullRequestDataService
   end
 
   def fetch_diff_data(diff_url)
-    response = client.send_get_request(diff_url)
+    response = client.send_get_request(URI(diff_url).path)
     response.code == 200 ? response.body : ""
   end
 
   def fetch_commits_data(commits_url)
-    response = client.send_get_request(commits_url)
+    response = client.send_get_request(URI(commits_url).path)
 
     raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 
@@ -65,7 +64,7 @@ class FetchGithubPullRequestDataService
   end
 
   def fetch_comments_data(comments_url)
-    response = client.send_get_request(comments_url)
+    response = client.send_get_request(URI(comments_url).path)
 
     raise StandardError, JSON.parse(response.body)["message"] unless response.code == 200
 

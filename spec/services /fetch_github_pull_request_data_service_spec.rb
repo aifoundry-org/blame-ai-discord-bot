@@ -67,19 +67,19 @@ RSpec.describe FetchGithubPullRequestDataService do
     context "when all data is successfully fetched" do
       before do
         allow(client).to receive(:send_get_request)
-          .with(pull_request_api_url)
+          .with(URI(pull_request_api_url).path)
           .and_return(instance_double(RestClient::Response, code: 200, body: pr_data.to_json))
 
         allow(client).to receive(:send_get_request)
-          .with(pr_data[:diff_url])
+          .with(URI(pr_data[:diff_url]).path)
           .and_return(instance_double(RestClient::Response, code: 200, body: diff_data))
 
         allow(client).to receive(:send_get_request)
-          .with(pr_data[:commits_url])
+          .with(URI(pr_data[:commits_url]).path)
           .and_return(instance_double(RestClient::Response, code: 200, body: commits_data.to_json))
 
         allow(client).to receive(:send_get_request)
-          .with(pr_data[:review_comments_url])
+          .with(URI(pr_data[:review_comments_url]).path)
           .and_return(instance_double(RestClient::Response, code: 200, body: comments_data.to_json))
       end
 
@@ -127,7 +127,7 @@ RSpec.describe FetchGithubPullRequestDataService do
     context "when pull request data cannot be fetched" do
       before do
         allow(client).to receive(:send_get_request)
-          .with(pull_request_api_url)
+          .with(URI(pull_request_api_url).path)
           .and_return(instance_double(RestClient::Response, code: 404, body: { message: "Not found" }.to_json))
       end
 

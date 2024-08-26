@@ -8,7 +8,8 @@ RSpec.describe Github::Client do
   let(:invalid_url) { "https://invalid.com/owner/repo/pull/123" }
 
   describe "#send_get_request" do
-    let(:url) { "https://api.github.com/some_endpoint" }
+    let(:path) { "/some_endpoint" }
+    let(:url) { "https://api.github.com#{path}" }
     let(:response) { double("response") }
 
     context "when the request is successful" do
@@ -18,7 +19,7 @@ RSpec.describe Github::Client do
 
       it "sends a GET request to the given URL" do
         expect(RestClient).to receive(:get).with(url, anything)
-        client.send_get_request(url)
+        client.send_get_request(path)
       end
 
       it "returns the response" do
@@ -36,7 +37,7 @@ RSpec.describe Github::Client do
       end
 
       it "rescues the exception and returns the response" do
-        result = client.send_get_request(url)
+        result = client.send_get_request(path)
         expect(result).to eq(error_response)
       end
     end

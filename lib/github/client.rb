@@ -2,8 +2,8 @@ module Github
   class Client
     BASE_URL = "https://api.github.com"
 
-    def send_get_request(url)
-      RestClient.get(url, headers)
+    def send_get_request(path)
+      RestClient.get("#{BASE_URL}#{path}", headers)
     rescue RestClient::ExceptionWithResponse => e
       e.response
     end
