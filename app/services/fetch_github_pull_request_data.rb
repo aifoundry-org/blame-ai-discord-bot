@@ -1,9 +1,9 @@
-class FetchGithubPullRequestDataService
+class FetchGithubPullRequestData
   attr_reader :pull_request_url, :client
 
-  def initialize(pull_request_url)
+  def initialize(pull_request_url, github_client: Github::Client.new)
     @pull_request_url = pull_request_url
-    @client = Github::Client.new
+    @client = github_client
   end
 
   def call

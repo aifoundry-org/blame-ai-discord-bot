@@ -1,11 +1,11 @@
 require 'rails_helper'
 require 'json'
 
-RSpec.describe FetchGithubPullRequestDataService do
+RSpec.describe FetchGithubPullRequestData do
   let(:pull_request_url) { "https://github.com/owner/repo/pull/123" }
   let(:pull_request_api_url) { "https://api.github.com/repos/owner/repo/pulls/123" }
-  let(:service) { described_class.new(pull_request_url) }
   let(:client) { instance_double(Github::Client) }
+  let(:service) { described_class.new(pull_request_url, github_client: client) }
 
   let(:pr_data) do
     {
@@ -57,10 +57,6 @@ RSpec.describe FetchGithubPullRequestDataService do
         "reactions" => { "+1" => 1, "-1" => 0 }
       }
     ]
-  end
-
-  before do
-    allow(Github::Client).to receive(:new).and_return(client)
   end
 
   describe "#call" do
