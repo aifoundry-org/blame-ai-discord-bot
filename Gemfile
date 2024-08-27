@@ -43,7 +43,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.1.0"
-  gem "rspec-llama" if ENV['ENABLE_RSPEC_LLAMA'] == 'true'
+  gem "rspec-llama" if ENV["ENABLE_RSPEC_LLAMA"] == "true"
 end
 
 group :development do

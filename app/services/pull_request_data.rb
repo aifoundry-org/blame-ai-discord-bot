@@ -1,7 +1,7 @@
 class PullRequestData
   def initialize(data)
     @data = data[:pull_request]
-    debugger;
+    debugger
   end
 
   def to_s
