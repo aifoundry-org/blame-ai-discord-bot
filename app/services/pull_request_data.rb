@@ -1,10 +1,11 @@
 class PullRequestData
   def initialize(data)
     @data = data[:pull_request]
+    debugger;
   end
 
   def to_s
-    <<~TEXT.truncate(500)
+    <<~TEXT
       Title: #{data[:title]}
       Creator: #{data[:creator]}
       Repository: #{data[:repo_owner]}/#{data[:repo]}
