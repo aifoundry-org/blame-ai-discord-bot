@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/aifoundry-org/rspec-llama.git
+  revision: e93101d44cbe9ff08042060323efe3de9cef439e
+  branch: github-actions
+  specs:
+    rspec-llama (0.1.0)
+      rspec (~> 3.0)
+      zeitwerk (~> 2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -231,6 +240,10 @@ GEM
       netrc (~> 0.8)
     rexml (3.3.6)
       strscan
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.2)
@@ -334,6 +347,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.0)
   rest-client (~> 2.1)
+  rspec-llama!
   rspec-rails (~> 6.1.0)
   rubocop-rails-omakase
   sqlite3 (>= 1.4)
