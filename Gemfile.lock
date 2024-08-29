@@ -1,10 +1,9 @@
 GIT
   remote: https://github.com/aifoundry-org/rspec-llama.git
-  revision: 885ceb15ff92b0d14b1262f447ea5e3732140b19
-  branch: github-actions
+  revision: b4b8e6dbac01ff398997f29169d529b791ac20fa
   specs:
     rspec-llama (0.1.0)
-      rspec (~> 3.0)
+      rspec
       zeitwerk (~> 2.6)
 
 GEM

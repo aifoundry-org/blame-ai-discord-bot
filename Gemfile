@@ -44,7 +44,7 @@ group :development, :test do
   gem "pry"
   gem "pry-nav"
 
-  gem "rspec-llama", git: "https://github.com/aifoundry-org/rspec-llama.git", branch: 'github-actions'
+  gem "rspec-llama", git: "https://github.com/aifoundry-org/rspec-llama.git"
 end
 
 gem "rest-client", "~> 2.1"
