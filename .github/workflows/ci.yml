@@ -37,3 +37,21 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+
+      - name: Install gems
+        run: bundle install
+      - name: Create DB
+        run: bundle exec rake db:create db:schema:load
+      - name: Run rspec
+        run: bundle exec rspec --exclude-pattern spec/llms/**
+

@@ -2,7 +2,7 @@ module DiscordBot
   extend self
 
   def init
-    @@bot = Discordrb::Bot.new(token:)
+    @@bot = Discordrb::Bot.new(token:) if token
   end
 
   def bot
@@ -12,7 +12,7 @@ module DiscordBot
   private
 
   def token
-    token = Rails.application.credentials.discord.bot.token
+    token = Rails.application.credentials.discord&.bot&.token
   end
 end
 

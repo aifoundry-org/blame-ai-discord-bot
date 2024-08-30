@@ -43,6 +43,8 @@ group :development, :test do
   gem "rspec-rails", "~> 6.1.0"
   gem "pry"
   gem "pry-nav"
+
+  gem "rspec-llama", git: "https://github.com/aifoundry-org/rspec-llama.git"
 end
 
 gem "rest-client", "~> 2.1"
