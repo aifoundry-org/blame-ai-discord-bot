@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe 'OpenAI' do
   subject(:assertion_result) { assertion.call(runner_result) }
 
