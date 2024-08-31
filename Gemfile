@@ -49,7 +49,6 @@ end
 group :development do
   gem "pry"
   gem "pry-nav"
-
 end
 
 gem "rest-client", "~> 2.1"
