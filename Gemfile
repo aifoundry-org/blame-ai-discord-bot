@@ -43,14 +43,13 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.1.0"
-  gem "rspec-llama" if ENV["ENABLE_RSPEC_LLAMA"] == "true"
+  gem "rspec-llama", git: "https://github.com/aifoundry-org/rspec-llama.git"
 end
 
 group :development do
   gem "pry"
   gem "pry-nav"
 
-  gem "rspec-llama", git: "https://github.com/aifoundry-org/rspec-llama.git"
 end
 
 gem "rest-client", "~> 2.1"
