@@ -24,6 +24,9 @@ module Discord
         bot.register_application_command(:pr_title, "Show PR title", server_id:) do |cmd|
           cmd.string("pr_url", "The URL of the PR", required: true)
         end
+        bot.register_application_command(:blame, "Summarize a PR", server_id:) do |cmd|
+          cmd.string("pr_url", "The URL of the PR", required: true)
+        end
       end
 
       # type !destroy_app in a channel to destroy(unregister) application commands
@@ -55,6 +58,24 @@ module Discord
         event.respond(content: "The PR title is: #{pr_data[:title]}")
       rescue ArgumentError => e
         event.respond(content: e.message)
+      end
+
+      bot.application_command(:blame) do |event|
+        Discordrb::LOGGER.info("Received application command: #{event.command_name}")
+
+        # Defer the response to let Discord know we're processing the command
+        event.defer
+
+        Thread.new do
+          begin
+            pr_url = event.options["pr_url"]
+            summary = Blame.new(pr_url).call
+
+            event.edit_response(content: summary.gsub(%r{\bhttps?://[^\s<]+}, '<\0>'))
+          rescue ArgumentError => e
+            event.edit_response(content: e.message)
+          end
+        end
       end
 
       bot.run

@@ -12,7 +12,7 @@ module DiscordBot
   private
 
   def token
-    token = Rails.application.credentials.discord&.bot&.token
+    @token ||= ENV["DISCORD_BOT_TOKEN"] || Rails.application.credentials.discord&.bot&.token
   end
 end
 
