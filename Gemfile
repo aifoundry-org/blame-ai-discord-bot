@@ -30,7 +30,7 @@ gem "bootsnap", require: false
 gem "discordrb", "~> 3.5.0"
 
 # LLMs
-gem "ruby-openai", "~> 6.3.0"
+gem "ruby-openai", "~> 7.1.0"
 gem "langchainrb"
 
 group :development, :test do
