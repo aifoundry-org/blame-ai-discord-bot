@@ -53,5 +53,5 @@ jobs:
       - name: Create DB
         run: bundle exec rake db:create db:schema:load
       - name: Run rspec
-        run: bundle exec rspec --exclude-pattern spec/llms/**
+        run: bundle exec rspec --exclude-pattern "spec/llms/**"
 

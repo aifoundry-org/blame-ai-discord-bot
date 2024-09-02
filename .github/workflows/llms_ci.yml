@@ -6,7 +6,9 @@ on:
 jobs:
   llms_specs:
     runs-on: ubuntu-latest
+    environment: test
     env:
+      PULL_REQUEST_URL: ${{ vars.PULL_REQUEST_URL }}
       OPENAI_ACCESS_TOKEN: ${{ secrets.OPENAI_ACCESS_TOKEN }}
     steps:
       - name: Checkout code
@@ -21,4 +23,3 @@ jobs:
         run: bundle install
       - name: Run rspec
         run: bundle exec rspec spec/llms
-
