@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for blame-ai-discord-bot on 2024-09-02T12:50:58+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'blame-ai-discord-bot'
+primary_region = 'sjc'
+console_command = '/rails/bin/rails console'
+
+[processes]
+app = "bin/rails blame_ai:run_bot"
+
+[build]
+
+[deploy]
+  release_command = "./bin/rails db:migrate"
+
+[[mounts]]
+  source = 'data'
+  destination = '/data'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  auto_stop_machines=false
+  auto_start_machines=false
+  processes = ['app']

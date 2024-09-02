@@ -107,6 +107,8 @@ GEM
       websocket-client-simple (>= 0.3.0)
     discordrb-webhooks (3.5.0)
       rest-client (>= 2.0.0)
+    dockerfile-rails (1.6.17)
+      rails (>= 3.0.0)
     domain_name (0.6.20240107)
     dotenv (3.1.2)
     drb (2.2.1)
@@ -371,6 +373,7 @@ DEPENDENCIES
   brakeman
   debug
   discordrb (~> 3.5.0)
+  dockerfile-rails (>= 1.6)
   dotenv (~> 3.1)
   langchainrb
   pry
