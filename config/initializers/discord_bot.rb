@@ -1,19 +1,21 @@
-module DiscordBot
-  extend self
+if ENV["DISCORD_BOT_TOKEN"]
+  module DiscordBot
+    extend self
 
-  def init
-    @@bot = Discordrb::Bot.new(token:) if token
+    def init
+      @@bot = Discordrb::Bot.new(token:) if token
+    end
+
+    def bot
+      @@bot || init
+    end
+
+    private
+
+    def token
+      @token ||= ENV["DISCORD_BOT_TOKEN"]
+    end
   end
 
-  def bot
-    @@bot || init
-  end
-
-  private
-
-  def token
-    @token ||= ENV["DISCORD_BOT_TOKEN"] || Rails.application.credentials.discord&.bot&.token
-  end
+  DiscordBot.init
 end
-
-DiscordBot.init

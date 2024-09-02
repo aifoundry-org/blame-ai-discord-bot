@@ -5,6 +5,7 @@ class Blame
 
   def call
     result = FetchGithubPullRequestData.new(pull_request_url).call
+    Rails.logger.info("Pull request data: #{result}")
     pull_request_data = PullRequestData.new(result)
 
     assistant.add_message content: pull_request_data.to_s
