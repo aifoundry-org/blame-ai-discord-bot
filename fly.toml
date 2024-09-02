@@ -7,6 +7,10 @@ app = 'blame-ai-discord-bot'
 primary_region = 'sjc'
 console_command = '/rails/bin/rails console'
 
+[processes]
+app = "bin/rails server"
+worker = "bin/rails blame_ai:run_bot"
+
 [build]
 
 [env]
@@ -43,6 +47,15 @@ console_command = '/rails/bin/rails console'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  auto_stop_machines=false
+  auto_start_machines=false
+  processes = ['worker']
 
 [[statics]]
   guest_path = '/rails/public'
