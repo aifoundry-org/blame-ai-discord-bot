@@ -1,10 +1,9 @@
 GIT
   remote: https://github.com/aifoundry-org/rspec-llama.git
-  revision: b4b8e6dbac01ff398997f29169d529b791ac20fa
+  revision: 5b30d39499f21f54469dfc8603dd0cf505d426ce
   specs:
     rspec-llama (0.1.0)
-      rspec
-      zeitwerk (~> 2.6)
+      rspec (~> 3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -348,7 +347,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.17)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   aarch64-linux
