@@ -54,5 +54,3 @@ end
 gem "rest-client", "~> 2.1"
 
 gem "dotenv", "~> 3.1"
-
-gem "dockerfile-rails", ">= 1.6", :group => :development
