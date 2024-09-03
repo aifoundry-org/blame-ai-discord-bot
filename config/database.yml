@@ -29,4 +29,4 @@ test:
 # ensure the database is located in a persisted volume.
 production:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_URL") %>
+  database: <%= ENV.fetch("DATABASE_URL") { "url" } %>

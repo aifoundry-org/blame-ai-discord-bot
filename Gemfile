@@ -47,6 +47,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "dockerfile-rails", ">= 1.6"
   gem "pry"
   gem "pry-nav"
 end
@@ -54,5 +55,3 @@ end
 gem "rest-client", "~> 2.1"
 
 gem "dotenv", "~> 3.1"
-
-gem "dockerfile-rails", ">= 1.6", :group => :development
