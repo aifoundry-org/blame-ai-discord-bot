@@ -110,7 +110,7 @@ GEM
     dockerfile-rails (1.6.17)
       rails (>= 3.0.0)
     domain_name (0.6.20240107)
-    dotenv (3.1.2)
+    dotenv (3.1.4)
     drb (2.2.1)
     erubi (1.13.0)
     event_emitter (0.2.6)
